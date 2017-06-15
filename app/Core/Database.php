@@ -5,8 +5,8 @@ class Database
 {
     private $host = '127.0.0.1';
     private $username = 'root';
-    private $password = 'rhfcrb#1';
-    private $dbname = 'zf2test';
+    private $password = 'root';
+    private $dbname = 'camo_test';
 
     public $database;
     public $errors;

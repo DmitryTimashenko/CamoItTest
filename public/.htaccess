@@ -1,8 +1,8 @@
 Options -MultiViews
 RewriteEngine On
 
-RewriteBase /camo_test/public
-#RewriteBase /
+#RewriteBase /camo_test/public
+RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 

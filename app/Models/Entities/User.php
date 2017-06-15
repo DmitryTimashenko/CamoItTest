@@ -3,9 +3,6 @@
 
 namespace Models\Entities;
 
-use PDO;
-
-
 class User
 {
     protected $id;

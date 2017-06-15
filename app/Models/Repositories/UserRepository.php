@@ -26,7 +26,7 @@ class UserRepository extends BaseRepository
             'registrationDate' => empty($user->getRegistrationDate()) ? 'NULL' :
                     $user->getRegistrationDate()->format('Y-m-d')
         ];
-        $this->db->prepare($this->sqlInsert)->execute($dataArray);
+        return $this->db->prepare($this->sqlInsert)->execute($dataArray);
     }
 
 }
