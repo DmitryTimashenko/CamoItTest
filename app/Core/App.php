@@ -11,12 +11,12 @@ class App
     {
         $url = $this->parseUrl();
 
-        if (file_exists('../app/controllers/' . $url[0] . '.php')) {
+        if (file_exists('../app/Controllers/' . $url[0] . '.php')) {
             $this->controller = $url[0];
             unset($url[0]);
         }
-
-        $this->controller = new Home();
+        $this->controller = 'Controllers\\' . $this->controller;
+        $this->controller = new $this->controller;
 
         if (isset($url[1])) {
             if (method_exists($this->controller, $url[1])) {

@@ -1,11 +1,10 @@
 <?php
 require_once '../app/views/header.php'
 ?>
-<h1>#1 Top Customers by total orders sum</h1>
+<h1>#2 Top Customers without successful orders for the last year</h1>
 <table>
     <tr>
         <th>#</th>
-        <th>Total</th>
         <th>Customer</th>
     </tr>
     <?php
@@ -13,7 +12,6 @@ require_once '../app/views/header.php'
     foreach ($data['data'] as $row) {?>
         <tr>
             <td><?=$i ?></td>
-            <td><?=$row['total_sum'] ?></td>
             <td><?=$row['firstname'] . ' ' . $row['lastname'] ?></td>
         </tr>
     <?php

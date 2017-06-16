@@ -3,11 +3,6 @@ namespace Core;
 
 class Database
 {
-    private $host = '127.0.0.1';
-    private $username = 'root';
-    private $password = 'root';
-    private $dbname = 'camo_test';
-
     public $database;
     public $errors;
 
@@ -15,12 +10,17 @@ class Database
 
     private function __construct()
     {
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+        $host = Configure::getParam('db_host');
+        $dbname = Configure::getParam('db_name');
+        $username = Configure::getParam('db_user');
+        $password = Configure::getParam('db_password');
+
+        $dsn = 'mysql:host=' . $host . ';dbname=' . $dbname;
 
         [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION];
 
         try {
-            $this->database = new \PDO($dsn, $this->username, $this->password);
+            $this->database = new \PDO($dsn, $username, $password);
         } catch (\PDOException $ex) {
             $this->errors = $ex;
         }

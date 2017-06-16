@@ -33,7 +33,7 @@ class UserRepository extends BaseRepository
 
     public function getStatistic1()
     {
-        $sql = 'SELECT SUM(orders.total) AS total_sum, user_master.id FROM user_master
+        $sql = 'SELECT SUM(orders.total) AS total_sum, user_master.firstname, user_master.lastname FROM user_master
                 LEFT JOIN orders ON orders.userId = user_master.id
                 WHERE orders.status = :stat
                 GROUP BY orders.userId
@@ -51,19 +51,24 @@ class UserRepository extends BaseRepository
         return $query->fetchAll();
     }
 
+    public function getStatistic2()
+    {
+        $sql = 'SELECT * FROM user_master
+                LEFT JOIN orders
+                ON  orders.status = :stat AND user_master.id = orders.userId AND orders.date >= NOW() - INTERVAL 1 YEAR
+                WHERE orders.id IS NULL
+                ORDER BY user_master.registrationDate DESC
+                limit :lim';
+
+        $limit = 500;
+        $status = Order::STATUS_SUCCESS;
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':lim', $limit, PDO::PARAM_INT);
+        $query->bindParam(':stat', $status, PDO::PARAM_INT);
+
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
 }
-
-
-//SELECT * FROM user_master
-//LEFT JOIN orders
-//ON  orders.status = 2 AND user_master.id = orders.userId AND orders.date >= NOW() - INTERVAL 1 YEAR
-//WHERE orders.id IS NULL
-//ORDER BY user_master.registrationDate DESC
-//limit 500;
-//
-//SELECT orders.id, user_master.email, orders.date FROM orders
-//LEFT JOIN user_master
-//ON user_master.id = orders.userId
-//where WEEKDAY(orders.date) < 5
-//ORDER BY orders.date DESC
-//LIMIT 500;
