@@ -25,17 +25,17 @@ class OrderRepository extends BaseRepository
 
 
 //SELECT count(id) FROM camo_test.orders;
-//
-//SELECT SQL_CACHE sum(orders.total) as total_sum, user_master.id from user_master
+////
+//SELECT SUM(orders.total) AS total_sum, user_master.id FROM user_master
 //LEFT JOIN orders ON user_master.id = orders.userId
-//where orders.status = 2
-//group by orders.userId
+//WHERE orders.status = 2
+//GROUP BY orders.userId
 //ORDER BY total_sum DESC
 //limit 500;
 //
-// SELECT SQL_CACHE sum(orders.total) as total_sum, user_master.firstname  from orders
-//LEFT JOIN user_master ON orders.userId = user_master.id
-//where orders.status = 2
-//group by orders.userId
-//ORDER BY total_sum DESC
+//SELECT user_master.id FROM user_master
+//LEFT JOIN orders
+//ON  orders.status = 2 AND user_master.id = orders.userId AND orders.date >= NOW() - INTERVAL 1 YEAR
+//WHERE orders.id IS NULL
+//ORDER BY user_master.registrationDate DESC
 //limit 500;

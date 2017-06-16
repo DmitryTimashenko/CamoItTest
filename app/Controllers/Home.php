@@ -9,11 +9,21 @@ class Home extends Controller
 {
     public function index()
     {
-        /** @var \Models\Repositories\UserRepository $user */
+        /** @var \Models\Repositories\UserRepository $userRepository */
         $userRepository = $this->getRepository('UserRepository');
 
         $this->view('home/index', [
             'users' => $userRepository->getAll()
+        ]);
+    }
+
+    public function statistic1()
+    {
+        /** @var \Models\Repositories\UserRepository $userRepository */
+        $userRepository = $this->getRepository('UserRepository');
+
+        $this->view('home/statistic1', [
+            'data' => $userRepository->getStatistic1()
         ]);
     }
 
